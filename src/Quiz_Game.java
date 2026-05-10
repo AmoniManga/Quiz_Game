@@ -1,10 +1,5 @@
 import java.util.*; import java.io.*;
 
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 public class Quiz_Game {
     public static void main(String[] args) {
         int choice;
