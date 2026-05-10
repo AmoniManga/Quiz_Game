@@ -36,8 +36,7 @@ public class QuizGameUI {
         btn6.setText("6. Exit");
         btn6.setBounds(100, 390, 300, 40);
 
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        mainPanel.revalidate(); mainPanel.repaint();
     }
     public static void main(String[] args) {
         JFrame frame = new JFrame("CyberQuest Quiz");
