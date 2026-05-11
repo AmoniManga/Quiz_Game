@@ -125,7 +125,7 @@ public class QuizGameUI {
         submitBtn.setBounds(200, 520, 600, 60);
 
         JButton homeBtn = new JButton("Go back to homepage");
-        homeBtn.setFont(new Font("Arial", Font.PLAIN, 20));
+        homeBtn.setFont(new Font("Arial", Font.BOLD, 20));
         homeBtn.setBounds(200, 600, 600, 50);
         homeBtn.addActionListener(e -> cardLayout.show(cardPanel, "Main"));
 
@@ -155,7 +155,12 @@ public class QuizGameUI {
             if (!isValidPassword(password)) {
                 JOptionPane.showMessageDialog(
                         loginPanel,
-                        "Please make sure your password has at least one letter, one number, and one special character!",
+                        "Please make sure your password has:\n" +
+                                "• Minimum 8 characters\n" +
+                                "• At least one letter\n" +
+                                "• At least one number\n" +
+                                "• At least one special character\n" +
+                                "NOTE: Passwords are case sensitive",
                         "Invalid Password",
                         JOptionPane.WARNING_MESSAGE
                 );
@@ -228,7 +233,7 @@ public class QuizGameUI {
         submitBtn.setBounds(200, 470, 600, 60);
 
         JButton homeBtn = new JButton("Go back to homepage");
-        homeBtn.setFont(new Font("Arial", Font.PLAIN, 20));
+        homeBtn.setFont(new Font("Arial", Font.BOLD, 20));
         homeBtn.setBounds(200, 550, 600, 50);
         homeBtn.addActionListener(e -> cardLayout.show(cardPanel, "Main"));
 
@@ -288,7 +293,7 @@ public class QuizGameUI {
         });
 
         JButton homeBtn = new JButton("Go back to homepage");
-        homeBtn.setFont(new Font("Arial", Font.PLAIN, 24));
+        homeBtn.setFont(new Font("Arial", Font.BOLD, 24));
         homeBtn.setBounds(250, 580, 500, 60);
         homeBtn.addActionListener(e -> cardLayout.show(cardPanel, "Main"));
 
