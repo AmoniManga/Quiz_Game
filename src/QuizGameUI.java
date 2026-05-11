@@ -7,25 +7,18 @@ public class QuizGameUI {
     private JButton btn1, btn2, btn3, btn4, btn5, btn6;
 
     public QuizGameUI() {
-        mainPanel = new JPanel();
-        headerLabel = new JLabel();
-        btn1 = new JButton();
-        btn2 = new JButton();
-        btn3 = new JButton();
-        btn4 = new JButton();
-        btn5 = new JButton();
-        btn6 = new JButton();
+        mainPanel = new JPanel(); headerLabel = new JLabel();
+        btn1 = new JButton(); btn2 = new JButton();
+        btn3 = new JButton(); btn4 = new JButton();
+        btn5 = new JButton(); btn6 = new JButton();
 
         mainPanel.setLayout(null);
         mainPanel.setBackground(Color.WHITE);
 
         mainPanel.add(headerLabel);
-        mainPanel.add(btn1);
-        mainPanel.add(btn2);
-        mainPanel.add(btn3);
-        mainPanel.add(btn4);
-        mainPanel.add(btn5);
-        mainPanel.add(btn6);
+        mainPanel.add(btn1); mainPanel.add(btn2);
+        mainPanel.add(btn3); mainPanel.add(btn4);
+        mainPanel.add(btn5); mainPanel.add(btn6);
 
         headerLabel.setText("<html><center>Welcome to the CyberQuest quiz!<br>" +
                 "This assignment is for Dr. Agada's COSC 402 class, Software & OS Security.<br>" +
