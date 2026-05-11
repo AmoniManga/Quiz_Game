@@ -1,90 +1,118 @@
-import javax.swing.*; import java.awt.*; import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class QuizGameUI {
-    private JPanel mainPanel;
+    private JPanel cardPanel; // The container for swapping screens
+    private JPanel mainPanel, loginPanel;
+    private CardLayout cardLayout;
     private JLabel headerLabel;
     private JButton btn1, btn2, btn3, btn4, btn5, btn6;
+    private JTextField userField;
+    private JPasswordField passField, rePassField;
 
     public QuizGameUI() {
-        mainPanel = new JPanel(); headerLabel = new JLabel();
-        btn1 = new JButton(); btn2 = new JButton();
-        btn3 = new JButton(); btn4 = new JButton();
-        btn5 = new JButton(); btn6 = new JButton();
-
-        mainPanel.setLayout(null);
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+        createMainPanel();
+        createLoginPanel();
+        cardPanel.add(mainPanel, "Main");
+        cardPanel.add(loginPanel, "Login");
+    }
+    private void createMainPanel() {
+        mainPanel = new JPanel(null);
         mainPanel.setBackground(Color.WHITE);
 
-        mainPanel.add(headerLabel);
-        mainPanel.add(btn1); mainPanel.add(btn2);
-        mainPanel.add(btn3); mainPanel.add(btn4);
-        mainPanel.add(btn5); mainPanel.add(btn6);
-
-        headerLabel.setText("<html><center>Welcome to the CyberQuest quiz!<br>" +
+        headerLabel = new JLabel("<html><center>Welcome to the CyberQuest quiz!<br>" +
                 "This assignment is for Dr. Agada's COSC 402 class, Software & OS Security.<br>" +
                 "Pick an option below to get started.</center></html>");
         headerLabel.setFont(new Font("Arial", Font.BOLD, 26));
         headerLabel.setBounds(50, 40, 900, 160);
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        mainPanel.add(headerLabel);
         Font btnFont = new Font("Arial", Font.PLAIN, 20);
 
-        btn1.setText("1. Login");
+        btn1 = new JButton("1. Login");
         btn1.setFont(btnFont);
         btn1.setBounds(200, 220, 600, 60);
+        btn1.addActionListener(e -> cardLayout.show(cardPanel, "Login"));
+        mainPanel.add(btn1);
 
-        btn2.setText("2. Password Security Challenge");
-        btn2.setFont(btnFont);
-        btn2.setBounds(200, 300, 600, 60);
+        ActionListener loginWarning = e -> JOptionPane.showMessageDialog(mainPanel,
+                "You must login before using! Click the first button!", "Access Denied", JOptionPane.WARNING_MESSAGE);
+        btn2 = new JButton("2. Password Security Challenge");
+        btn3 = new JButton("3. Phishing Detection Challenge");
+        btn4 = new JButton("4. Encryption Basics Challenge");
+        btn5 = new JButton("5. View Scores");
 
-        btn3.setText("3. Phishing Detection Challenge");
-        btn3.setFont(btnFont);
-        btn3.setBounds(200, 380, 600, 60);
-
-        btn4.setText("4. Encryption Basics Challenge");
-        btn4.setFont(btnFont);
-        btn4.setBounds(200, 460, 600, 60);
-
-        btn5.setText("5. View Scores");
-        btn5.setFont(btnFont);
-        btn5.setBounds(200, 540, 600, 60);
-
-        btn6.setText("6. Exit");
+        JButton[] restrictedBtns = {btn2, btn3, btn4, btn5};
+        int yPos = 300;
+        for (JButton b : restrictedBtns) {
+            b.setFont(btnFont);
+            b.setBounds(200, yPos, 600, 60);
+            b.addActionListener(loginWarning);
+            mainPanel.add(b);
+            yPos += 80;
+        }
+        btn6 = new JButton("6. Exit");
         btn6.setFont(btnFont);
         btn6.setBounds(200, 620, 600, 60);
-
-        btn6.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Goodbye! Thanks for playing CyberQuest.", "Exit", JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
-            }
-        }); ActionListener loginWarning = new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(mainPanel, "You must login before using! Click the first button!", "Access Denied", JOptionPane.WARNING_MESSAGE);
-            }
-        };
-        btn2.addActionListener(loginWarning);
-        btn3.addActionListener(loginWarning);
-        btn4.addActionListener(loginWarning);
-        btn5.addActionListener(loginWarning);
+        btn6.addActionListener(e -> {
+            JOptionPane.showMessageDialog(mainPanel, "Goodbye! Thanks for playing CyberQuest.", "Exit", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        });
+        mainPanel.add(btn6);
     }
+    private void createLoginPanel() {
+        loginPanel = new JPanel(null);
+        loginPanel.setBackground(Color.WHITE);
+        Font labelFont = new Font("Arial", Font.PLAIN, 28);
 
+        JLabel uLabel = new JLabel("Create Username / Email");
+        uLabel.setFont(labelFont);
+        uLabel.setBounds(200, 50, 600, 40);
+        userField = new JTextField();
+        userField.setBounds(200, 100, 600, 60);
+
+        JLabel pLabel = new JLabel("Create Password");
+        pLabel.setFont(labelFont);
+        pLabel.setBounds(200, 200, 600, 40);
+        passField = new JPasswordField();
+        passField.setBounds(200, 250, 600, 60);
+
+        JLabel rLabel = new JLabel("Re-Enter Password");
+        rLabel.setFont(labelFont);
+        rLabel.setBounds(200, 350, 600, 40);
+        rePassField = new JPasswordField();
+        rePassField.setBounds(200, 400, 600, 60);
+
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setFont(new Font("Arial", Font.BOLD, 22));
+        submitBtn.setBounds(200, 550, 600, 60);
+        submitBtn.addActionListener(e -> cardLayout.show(cardPanel, "Main"));
+
+        loginPanel.add(uLabel);
+        loginPanel.add(userField);
+        loginPanel.add(pLabel);
+        loginPanel.add(passField);
+        loginPanel.add(rLabel);
+        loginPanel.add(rePassField);
+        loginPanel.add(submitBtn);
+    }
     public static void main(String[] args) {
         JFrame frame = new JFrame("CyberQuest Quiz");
         QuizGameUI myUI = new QuizGameUI();
-        frame.setContentPane(myUI.mainPanel);
+        frame.setContentPane(myUI.cardPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
-
-    {
+    } {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
 // >>> IMPORTANT!! <<<
 // DO NOT EDIT OR ADD ANY CODE HERE!
         $$$setupUI$$$();
     }
-
     /**
      * Method generated by IntelliJ IDEA GUI Designer
      * >>> IMPORTANT!! <<<
@@ -118,7 +146,6 @@ public class QuizGameUI {
         btn6.setText("Button6");
         mainPanel.add(btn6);
     }
-
     /**
      * @noinspection ALL
      */
