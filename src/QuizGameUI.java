@@ -9,9 +9,7 @@ public class QuizGameUI {
     private JTextField userField, existingUserField;
     private JPasswordField passField, rePassField, existingPassField;
 
-    private String savedUsername = "";
-    private String savedPassword = "";
-    private String selectedReadingTitle = "";
+    private String savedUsername = ""; private String savedPassword = ""; private String selectedReadingTitle = "";
 
     public QuizGameUI() {
         cardLayout = new CardLayout(); cardPanel = new JPanel(cardLayout);
@@ -142,8 +140,7 @@ public class QuizGameUI {
                         JOptionPane.WARNING_MESSAGE
                 );
                 return;
-            }
-            if (!password.equals(rePassword)) {
+            } if (!password.equals(rePassword)) {
                 JOptionPane.showMessageDialog(
                         loginPanel,
                         "Passwords do not match!",
@@ -151,8 +148,7 @@ public class QuizGameUI {
                         JOptionPane.WARNING_MESSAGE
                 );
                 return;
-            }
-            if (!isValidPassword(password)) {
+            } if (!isValidPassword(password)) {
                 JOptionPane.showMessageDialog(
                         loginPanel,
                         "Please make sure your password has:\n" +
@@ -167,8 +163,7 @@ public class QuizGameUI {
                 return;
             }
 
-            savedUsername = username;
-            savedPassword = password;
+            savedUsername = username; savedPassword = password;
             JButton[] restrictedBtns = {btn2, btn3, btn4};
             for (JButton b : restrictedBtns) {
                 for (ActionListener al : b.getActionListeners()) {
