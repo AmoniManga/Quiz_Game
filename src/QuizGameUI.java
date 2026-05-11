@@ -80,7 +80,7 @@ public class QuizGameUI {
     }
 
     private boolean isValidPassword(String password) {
-        if (password.length() < 8) return false;
+        if (password.length() < 12) return false;
         boolean hasLetter = false;
         boolean hasNumber = false;
         boolean hasSpecial = false;
@@ -152,7 +152,7 @@ public class QuizGameUI {
                 JOptionPane.showMessageDialog(
                         loginPanel,
                         "Please make sure your password has:\n" +
-                                "• Minimum 8 characters\n" +
+                                "• Minimum 12 characters\n" +
                                 "• At least one letter\n" +
                                 "• At least one number\n" +
                                 "• At least one special character\n" +
@@ -182,7 +182,6 @@ public class QuizGameUI {
                     } else if (b == btn5) {
                         selectedReadingTitle = "View Scores";
                     }
-
                     cardLayout.show(cardPanel, "ExistingLogin");
                 });
             }
@@ -238,7 +237,7 @@ public class QuizGameUI {
             if (!enteredUsername.equals(savedUsername) || !enteredPassword.equals(savedPassword)) {
                 JOptionPane.showMessageDialog(
                         existingLoginPanel,
-                        "Username or password is incorrect!",
+                        "Login has failed!",
                         "Login Failed",
                         JOptionPane.WARNING_MESSAGE
                 );
@@ -278,7 +277,8 @@ public class QuizGameUI {
         startQuizBtn.addActionListener(e -> {
             int choice = JOptionPane.showConfirmDialog(
                     readingPanel,
-                    "Are you sure you want to start the quiz?",
+                    "Are you sure you want to start the quiz?\n" +
+                            "You cannot undo this action.",
                     "Quiz Confirmation",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.WARNING_MESSAGE
@@ -286,14 +286,11 @@ public class QuizGameUI {
             if (choice == JOptionPane.OK_OPTION) {
             }
         });
-
         JButton homeBtn = new JButton("Go back to homepage");
         homeBtn.setFont(new Font("Arial", Font.BOLD, 24));
         homeBtn.setBounds(250, 580, 500, 60);
         homeBtn.addActionListener(e -> cardLayout.show(cardPanel, "Main"));
-
-        readingPanel.add(startQuizBtn);
-        readingPanel.add(homeBtn);
+        readingPanel.add(startQuizBtn); readingPanel.add(homeBtn);
     }
 
     public static void main(String[] args) {
